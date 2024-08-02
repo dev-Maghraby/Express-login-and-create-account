@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <style>
+        .card {
+            border: 1px solid black;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input {
+            margin-top: 12px;
+            margin-bottom: 12px;
+
+        }
+
+        #login {
+            padding: 12px 8px;
+            border: none;
+            background-color: tomato;
+            color: aliceblue;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <h1>Login</h1>
+        <div class="card">
+            <h3>Login to your account</h3>
+            <input type="email" placeholder="username" id="user">
+            <input type="password" id="pass" placeholder="password">
+            <button type="submit" id="login">Submit</button>
+        </div>
+    </div>
+
+    <script type="module">
+        document.getElementById('login').addEventListener('click', () => {
+
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+
+            const udata = { user: user, pass: pass };
+
+            if (!user == '' && !pass == '') {
+                fetch('http://192.168.1.8:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(udata)
+                })
+                    .then(respnse => respnse.json())
+                    .then((data) => {
+                        if (data.stat) {
+                            alert('login successful !');
+                            localStorage.setItem('user', user);
+                            localStorage.setItem('pass', pass);
+                            window.open('http://192.168.1.8:3000/', '_self')
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+            }else{
+                alert('error');
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

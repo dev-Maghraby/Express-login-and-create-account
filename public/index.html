@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>App</title>
+    <style>
+        #user{
+            display: none;
+        }
+        #acc{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        a{
+            text-decoration: none;
+        }
+        .sign{
+            background-color: tomato;
+            padding: 8px;
+            border-radius: 8px;
+            color: aliceblue;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Welcome</h1>
+         <div id="user">
+            <p id="name">username</p>
+         </div>
+         <div id="acc">
+            <p>Sign in to your account !</p>
+            <a class="sign" href="./login.html">Sign in</a>
+            <a href="./create.html">Don't have account yet ?</a>
+         </div>
+
+         <Button id="out" style="display: none;">Sign out</Button>
+    </div>
+
+    <script type="module">
+        const user = localStorage.getItem('user');
+
+        if (user) {
+            document.getElementById('user').style.display = 'block';
+            document.getElementById('name').innerHTML = user;
+
+            document.getElementById('acc').style.display = 'none';
+            const out = document.getElementById('out');
+
+            out.style.display = 'block';
+            out.addEventListener('click', ()=>{
+                localStorage.clear();
+                window.open('http://192.168.1.8:3000/', '_self');
+            });
+        }
+    </script>
+    
+</body>
+</html>

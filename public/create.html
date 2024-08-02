@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>create</title>
+    <style>
+        .card{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 30px;
+            border: 1px solid black;
+            flex-direction: column;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+        input{
+            margin: 12px;
+        }
+        button{
+            margin: 12px;
+            padding: 8px 12px;
+            background-color: tomato;
+            color: aliceblue;
+            border-radius: 8px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Create your account now !</h1>
+        <div class="card">
+            <input type="email" placeholder="user name" id="user">
+            <input type="password" placeholder="password" id="pass">
+            <button type="submit" id="crt">Create</button>
+            <script type="module">
+                document.getElementById('crt').addEventListener('click', ()=>{
+                    let pass = document.getElementById('pass').value
+                    let user = document.getElementById('user').value
+
+                    let data = {user: user, pass: pass};
+                    console.log(data);
+
+                    if (!pass == '' && !user == '') {
+                        fetch('http://192.168.1.8:3000/api/create', {
+                            method: "POST",
+                            headers: {
+                                'Content-Type' : 'application/json'
+                            }, 
+                            body: JSON.stringify(data)
+                        }).then(response => response.json())
+                          .then((data) => {
+                            let stat = data.stat;
+                            if (stat) {
+                                alert('success !');
+                                localStorage.setItem('user', user);
+                                localStorage.setItem('pass', pass);
+                                window.open('http://192.168.1.8:3000/', '_self');
+                            } else {
+                                alert('failed');
+                                console.log(data.message);
+                            }
+                          })
+                          .catch((error) => {
+                            alert('error fetching data');
+                            console.error(error);
+                          })
+                    } else {
+                        alert('error');
+                    }
+                })
+            </script>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -2,14 +2,11 @@
 
 ### This is a very simple account management in Express js
 
--[installation](#installation)
--[Usage](#usage)
-
 ### Installation
 ```sh
 #clone the repo
-
-cd repo
+git clone https://github.com/dev-Maghraby/Express-login-and-create-account.git
+cd Express-login-and-create-account
 
 npm install
 ```

@@ -1,11 +1,11 @@
-﻿# Express-login-and-create-account
+﻿## Express-login-and-create-account
 
-## This is a very simple account management in Express js
+### This is a very simple account management in Express js
 
 -[installation](#installation)
 -[Usage](#usage)
 
-##Installation
+### Installation
 ```sh
 #clone the repo
 
@@ -14,7 +14,7 @@ cd repo
 npm install
 ```
 
-###Usage
+### Usage
 ```sh
 node main
 ```
